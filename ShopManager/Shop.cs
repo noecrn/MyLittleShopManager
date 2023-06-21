@@ -82,7 +82,30 @@ namespace ShopManager
 
         public void ShowInfo(string name)
         {
-            throw new NotImplementedException();
+            int place = FindProductByName(name);
+            if (place == -1)
+            {
+                Console.WriteLine($"Product {name} not found");
+            }
+            else
+            {
+                var quantity = 1;
+                if (Products[place] is Stackable)
+                {
+                    quantity = (Products[place] as Stackable).Quantity;
+                }
+
+                if (Products[place] is Wine)
+                {
+                    quantity = (Products[place] as Wine).Quantity;
+                }
+
+                if (Products[place] is Seafood)
+                {
+                    quantity = (Products[place] as Seafood).Quantity;
+                }
+                Console.WriteLine($"Name: {Products[place].Name}\nPrice: {Products[place].Price}\nQuantity: {quantity}\n");
+            }
         }
         
         public float UseShoppingList(ShoppingList shoppingList)
