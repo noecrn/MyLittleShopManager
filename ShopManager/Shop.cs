@@ -41,6 +41,11 @@ namespace ShopManager
                     name = $"{Products[i].Name} {(Products[0] as Wine).Age}yrs";
                     quantity = (Products[i] as Wine).Quantity;
                 }
+
+                if (Products[i] is Artwork && !(Products[i] as Artwork).InStock)
+                {
+                    quantity = 0;
+                }
                 stock.Append((name, quantity));
             }
             return stock;
