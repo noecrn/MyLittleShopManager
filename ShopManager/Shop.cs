@@ -3,6 +3,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using ShopManager.Products;
 using ShopManager.Products.Artwork;
+using ShopManager.Products.Food;
 using ShopManager.Products.Wine;
 
 namespace ShopManager
@@ -37,7 +38,7 @@ namespace ShopManager
 
                 if (Products[i] is Wine)
                 {
-                    name = $"{Products[i].Name} {(Products[0] as Artwork).Year}yrs";
+                    name = $"{Products[i].Name} {(Products[0] as Wine).Age}yrs";
                     quantity = (Products[i] as Wine).Quantity;
                 }
                 stock.Append((name, quantity));
