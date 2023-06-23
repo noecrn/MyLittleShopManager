@@ -8,7 +8,7 @@ namespace ShopManager.Products.Food
 
         public Moussaka(int quantity = 1)
         {
-            throw new NotImplementedException();
+            Quantity = quantity;
         }
     }
 }

@@ -23,31 +23,35 @@ namespace ShopManager
         private void AddMoney(float money) => Balance += money;
 
         private void RemoveMoney(float money) => Balance -= money;
-
+        
         public (string Name, int Quantity)[] GetStock()
         {
-            (string Name, int Quantity)[] stock = { };
+            (string Name, int Quantity)[] stock = new (string Name, int Quantity)[Products.Length];
+
             for (int i = 0; i < Products.Length; i++)
             {
                 var quantity = 1;
                 var name = Products[i].Name;
-                if (Products[i] is Stackable)
+
+                if (Products[i] is Stackable stackableProduct)
                 {
-                    quantity = (Products[i] as Stackable).Quantity;
+                    quantity = stackableProduct.Quantity;
                 }
 
-                if (Products[i] is Wine)
+                if (Products[i] is Wine wineProduct)
                 {
-                    name = $"{Products[i].Name} {(Products[0] as Wine).Age}yrs";
-                    quantity = (Products[i] as Wine).Quantity;
+                    name = $"{wineProduct.Name} {wineProduct.Age}yrs";
+                    quantity = wineProduct.Quantity;
                 }
 
-                if (Products[i] is Artwork && !(Products[i] as Artwork).InStock)
+                if (Products[i] is Artwork artworkProduct && !artworkProduct.InStock)
                 {
                     quantity = 0;
                 }
-                stock.Append((name, quantity));
+
+                stock[i] = (name, quantity);
             }
+
             return stock;
         }
 
@@ -55,7 +59,12 @@ namespace ShopManager
         {
             for (int i = 0; i < Products.Length; i++)
             {
-                if (Products[i].Name == name)
+                if (Products[i] is Stackable stackableProduct && stackableProduct.Name == name)
+                {
+                    return i;
+                }
+
+                if (Products[i] is Wine wineProduct && $"{wineProduct.Name} {wineProduct.Age}yrs" == name)
                 {
                     return i;
                 }
@@ -66,23 +75,192 @@ namespace ShopManager
 
         public void Buy(int index, int quantity)
         {
+            var product = Products[index];
+            if (index < 0 || index > Products.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (Balance < product.Price)
+            {
+                throw new NotEnoughMoneyException();
+            }
             
-            throw new NotImplementedException();
+            if (quantity < 0)
+            {
+                throw new InvalidQuantityException();
+            }
+
+            if (product is Stackable)
+            {
+                if (quantity > (product as Stackable).Quantity)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price * quantity;
+                // (product as Stackable).Quantity += quantity;
+            }
+
+            if (product is Artwork)
+            {
+                if (quantity > 1)
+                {
+                    throw new InvalidQuantityException();
+                }
+
+                if (FindProductByName(product.Name) != -1)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price;
+                Products.Append(product);
+            }
+
+            if (product is Wine)
+            {
+                if (quantity > (product as Wine).Quantity)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price * quantity;
+                // (product as Wine).Quantity += quantity;
+            }
         }
         
         public void Buy(string name, int quantity)
         {
-            throw new NotImplementedException();
+            var index = FindProductByName(name);
+            var product = Products[index];
+            if (index < 0 || index > Products.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (Balance < product.Price)
+            {
+                throw new NotEnoughMoneyException();
+            }
+            
+            if (quantity < 0)
+            {
+                throw new InvalidQuantityException();
+            }
+
+            if (product is Stackable)
+            {
+                if (quantity > (product as Stackable).Quantity)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price * quantity;
+                // (product as Stackable).Quantity += quantity;
+            }
+
+            if (product is Artwork)
+            {
+                if (quantity > 1)
+                {
+                    throw new InvalidQuantityException();
+                }
+
+                if (FindProductByName(product.Name) != -1)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price;
+                Products.Append(product);
+            }
+
+            if (product is Wine)
+            {
+                if (quantity > (product as Wine).Quantity)
+                {
+                    throw new NotEnoughItemsException();
+                }
+
+                Balance -= product.Price * quantity;
+                // (product as Wine).Quantity += quantity;
+            }
         }
 
         public void Sell(int index, int quantity)
         {
-            throw new NotImplementedException();
+            var product = Products[index];
+            if (index < 0 || index > Products.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (Balance < product.Price * product.SaleFactor * quantity)
+            {
+                throw new NotEnoughMoneyException();
+            }
+            
+            if (quantity < 0)
+            {
+                throw new InvalidQuantityException();
+            }
+
+            if (product is Stackable)
+            {
+                Balance += product.Price * product.SaleFactor * quantity;
+                // (product as Stackable).Quantity -= quantity;
+            }
+
+            if (product is Artwork)
+            {
+                Balance += product.Price * product.SaleFactor;
+                (product as Artwork).InStock = false;
+            }
+
+            if (product is Wine)
+            {
+                Balance += product.Price * product.SaleFactor * quantity;
+                // (product as Wine).Quantity -= quantity;
+            }
         }
 
         public void Sell(string name, int quantity)
         {
-            throw new NotImplementedException();
+            var index = FindProductByName(name);
+            var product = Products[index];
+            if (index < 0 || index > Products.Length)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
+            if (Balance < product.Price * product.SaleFactor * quantity)
+            {
+                throw new NotEnoughMoneyException();
+            }
+            
+            if (quantity < 0)
+            {
+                throw new InvalidQuantityException();
+            }
+
+            if (product is Stackable)
+            {
+                Balance += product.Price * product.SaleFactor * quantity;
+                // (product as Stackable).Quantity -= quantity;
+            }
+
+            if (product is Artwork)
+            {
+                Balance += product.Price * product.SaleFactor;
+                (product as Artwork).InStock = false;
+            }
+
+            if (product is Wine)
+            {
+                Balance += product.Price * product.SaleFactor * quantity;
+                // (product as Wine).Quantity -= quantity;
+            }
         }
 
         public void ShowInfo(string name)
@@ -90,7 +268,7 @@ namespace ShopManager
             int place = FindProductByName(name);
             if (place == -1)
             {
-                Console.WriteLine($"Product {name} not found");
+                Console.WriteLine($"Product '{name}' not found");
             }
             else
             {

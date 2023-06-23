@@ -1,19 +1,22 @@
 ﻿using System;
+using ShopManager.Products;
 using ShopManager.Products.Food;
+using ShopManager.Products.Wine;
 
-namespace MyApp // Note: actual namespace depends on the project name.
+namespace ShopManager // Note: actual namespace depends on the project name.
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Seafood a = new Seafood(3);
-            int b = 2;
-            Seafood c = (Seafood)(a + b);           // c.Quantity == 5
+            Product[] products = new Product[]
+            {
+                new Seafood(15),
+                new Moussaka(9),
+                new Feta(12),
+            };
 
-            Moussaka a1 = new Moussaka(3);
-            int b1 = 2;
-            Moussaka c1 = a1 - b1 as Moussaka;          // c.Quantity == 1
+            Shop shop = new Shop(1000, products);
         }
     }
 }

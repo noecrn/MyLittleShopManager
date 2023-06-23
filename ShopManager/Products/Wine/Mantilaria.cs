@@ -8,7 +8,8 @@ namespace ShopManager.Products.Wine
 
         public Mantilaria(int age = 100, int quantity = 1)
         {
-            throw new NotImplementedException();
+            Quantity = quantity;
+            Age = age;
         }
     }
 }

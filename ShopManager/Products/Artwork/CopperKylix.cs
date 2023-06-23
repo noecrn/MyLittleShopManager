@@ -10,7 +10,7 @@ namespace ShopManager.Products.Artwork
 
         public CopperKylix(bool inStock = true)
         {
-            throw new NotImplementedException();
+            InStock = inStock;
         }
     }
 }

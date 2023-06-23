@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ShopManager
-build_property.ProjectDir = /home/noe.cornu/Downloads/MyLittleShopManager/ShopManager/
+build_property.ProjectDir = /Users/noecornu/Documents/MyLittleShopManager/ShopManager/

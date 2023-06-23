@@ -8,16 +8,16 @@ namespace ShopManager.Products
 
         public static Stackable operator +(Stackable stack, int quantity)
         {
-            var stackClone = stack.MemberwiseClone();
-            stack.Quantity += quantity;
-            return stack;
+            Stackable newStack = (Stackable)stack.MemberwiseClone();
+            newStack.Quantity += quantity;
+            return newStack;
         }
 
         public static Stackable operator -(Stackable stack, int quantity)
         {
-            var stackClone = stack.MemberwiseClone();
-            stack.Quantity -= quantity;
-            return stack;
+            Stackable newStack = (Stackable)stack.MemberwiseClone();
+            newStack.Quantity -= quantity;
+            return newStack;
         }
     }
 }

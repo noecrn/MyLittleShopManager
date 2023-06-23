@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/home/noe.cornu/.nuget/packages/": {}
+    "/Users/noecornu/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/noe.cornu/Downloads/MyLittleShopManager/ShopManager/ShopManager.csproj",
+      "projectUniqueName": "/Users/noecornu/Documents/MyLittleShopManager/ShopManager/ShopManager.csproj",
       "projectName": "ShopManager",
-      "projectPath": "/home/noe.cornu/Downloads/MyLittleShopManager/ShopManager/ShopManager.csproj",
-      "packagesPath": "/home/noe.cornu/.nuget/packages/",
-      "outputPath": "/home/noe.cornu/Downloads/MyLittleShopManager/ShopManager/obj/",
+      "projectPath": "/Users/noecornu/Documents/MyLittleShopManager/ShopManager/ShopManager.csproj",
+      "packagesPath": "/Users/noecornu/.nuget/packages/",
+      "outputPath": "/Users/noecornu/Documents/MyLittleShopManager/ShopManager/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/noe.cornu/.nuget/NuGet/NuGet.Config"
+        "/Users/noecornu/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/nix/store/ix3dbs5l8qkmxprkfm4ip2frf25s2iwp-dotnet-sdk-7.0.102/sdk/7.0.102/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.100/RuntimeIdentifierGraph.json"
       }
     }
   }

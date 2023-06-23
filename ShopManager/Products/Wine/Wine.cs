@@ -7,7 +7,7 @@ namespace ShopManager.Products.Wine
         public override float SaleFactor => (float)4.5;
         protected abstract float PriceFactor { get; }
         public int Age { get; protected set; }
-        public override float Price => (int)(SaleFactor * Age);
+        public override float Price => (int)(PriceFactor * Age);
 
         public override string GetInfo()
         {
